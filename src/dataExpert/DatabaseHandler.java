@@ -7,11 +7,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DatabaseHandler implements AutoCloseable {
-    String databasePath;
+    private String databasePath;
 
-    String databaseUrl;
+    private String databaseUrl;
 
-    Connection connection = null;
+    private Connection connection = null;
 
     public DatabaseHandler(String databasePath) {
         this.databasePath = databasePath;
@@ -75,53 +75,5 @@ public class DatabaseHandler implements AutoCloseable {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-    }
-
-    public void createNewDatabase(String databaseName) {
-        try (Connection conn = DriverManager.getConnection(this.databaseUrl)) {
-            if (conn != null) {
-                DatabaseMetaData meta = conn.getMetaData();
-                System.out.println("The driver name is " + meta.getDriverName());
-                System.out.println("A new database has been created.");
-            }
-
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-    }
-
-    public void createNewTable() {
-        String url = this.databaseUrl;
-
-        String sql = "CREATE TABLE entries (\n"
-                + "	id integer PRIMARY KEY,\n"
-                + "	extraction_date date,\n"
-                + "	n1 integer,\n"
-                + "	n2 integer,\n"
-                + "	n3 integer,\n"
-                + "	n4 integer,\n"
-                + "	n5 integer,\n"
-                + "	n6 integer \n"
-                + ");";
-
-        try (Connection conn = DriverManager.getConnection(url);
-             Statement stmt = conn.createStatement()) {
-            stmt.execute(sql);
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-    }
-
-    public void insert(Integer id, Entry entry) throws Exception{
-        String sql = "INSERT INTO entries VALUES(?,?,?,?,?,?,?,?)";
-
-        Connection conn = this.getConnection();
-        PreparedStatement statement = conn.prepareStatement(sql);
-        statement.setInt(1, id);
-        statement.setString(2, entry.getDate());
-        for (int i = 0; i < 6; ++i) {
-            statement.setInt(3 + i, entry.getNumbers().get(i));
-        }
-        statement.executeUpdate();
     }
 }

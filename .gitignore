@@ -1,1 +1,4 @@
 *.xml
+*.db
+*.iml
+source.txt
