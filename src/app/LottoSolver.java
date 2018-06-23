@@ -5,24 +5,13 @@ import model.Entry;
 
 import java.util.List;
 
+import static model.Entries.displayEntries;
+
 public class LottoSolver {
 
-    private static String databasePath = "database/lotto_archive.db";
-
     public static void main(String args[]) {
-        List<Entry> entries = loadEntries();
+        DatabaseHandler databaseHandler = new DatabaseHandler();
+        List<Entry> entries = databaseHandler.getAll();
         displayEntries(entries);
     }
-
-    private static List<Entry> loadEntries(){
-        DatabaseHandler databaseHandler = new DatabaseHandler(databasePath);
-        return databaseHandler.selectAll();
-    }
-
-    private static void displayEntries(List<Entry> entries){
-        for (Entry entry : entries) {
-            System.out.println(entry);
-        }
-    }
-
 }

@@ -13,6 +13,11 @@ public class DatabaseHandler implements AutoCloseable {
 
     private Connection connection = null;
 
+    public DatabaseHandler(){
+        this.databasePath = "database/lotto_archive.db";
+        this.databaseUrl = "jdbc:sqlite:" + this.databasePath;
+    }
+
     public DatabaseHandler(String databasePath) {
         this.databasePath = databasePath;
         this.databaseUrl = "jdbc:sqlite:" + this.databasePath;
@@ -38,7 +43,7 @@ public class DatabaseHandler implements AutoCloseable {
         return conn;
     }
 
-    public List<Entry> selectAll() {
+    public List<Entry> getAll() {
         String sql = "SELECT id, extraction_date, n1, n2, n3, n4, n5, n6 FROM entries";
         List<Entry> entries = new ArrayList<>();
         try (Connection conn = this.getConnection();
