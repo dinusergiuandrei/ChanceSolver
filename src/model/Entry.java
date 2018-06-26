@@ -32,6 +32,8 @@ public class Entry {
         this.id = id;
     }
 
+
+
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();

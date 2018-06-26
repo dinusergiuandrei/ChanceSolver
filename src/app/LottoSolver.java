@@ -1,17 +1,30 @@
 package app;
 
-import dataExpert.DatabaseHandler;
+import Utils.Integers;
+import dataExpert.SqliteDatabase;
 import model.Entry;
 
+import java.util.ArrayList;
 import java.util.List;
-
-import static model.Entries.displayEntries;
 
 public class LottoSolver {
 
     public static void main(String args[]) {
-        DatabaseHandler databaseHandler = new DatabaseHandler();
-        List<Entry> entries = databaseHandler.getAll();
-        displayEntries(entries);
+        SqliteDatabase sqliteDatabase = new SqliteDatabase();
+        List<Entry> entries = sqliteDatabase.getAll();
+        //displayEntries(entries);
+
+        List<Integer> mins = new ArrayList<>();
+        List<Integer> maxs = new ArrayList<>();
+
+        for (Entry entry : entries) {
+            mins.add(Integers.getMin(entry.getNumbers()));
+            maxs.add(Integers.getMax(entry.getNumbers()));
+        }
+
+        System.out.println("Average minimum: " + Integers.getAverage(mins));
+        System.out.println("Average maximum: " + Integers.getAverage(maxs));
     }
+
+
 }

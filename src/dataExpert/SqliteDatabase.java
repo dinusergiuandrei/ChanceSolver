@@ -6,19 +6,19 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DatabaseHandler implements AutoCloseable {
+public class SqliteDatabase implements AutoCloseable {
     private String databasePath;
 
     private String databaseUrl;
 
     private Connection connection = null;
 
-    public DatabaseHandler(){
+    public SqliteDatabase(){
         this.databasePath = "database/lotto_archive.db";
         this.databaseUrl = "jdbc:sqlite:" + this.databasePath;
     }
 
-    public DatabaseHandler(String databasePath) {
+    public SqliteDatabase(String databasePath) {
         this.databasePath = databasePath;
         this.databaseUrl = "jdbc:sqlite:" + this.databasePath;
     }
