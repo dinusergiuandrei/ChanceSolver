@@ -1,6 +1,6 @@
 package app;
 
-import Utils.Integers;
+import statistics.computing.Integers;
 import dataExpert.SqliteDatabase;
 import model.Entry;
 
